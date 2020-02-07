@@ -11,6 +11,7 @@ var handlebars = require('express3-handlebars')
 var index = require('./routes/index');
 // Example route
 // var user = require('./routes/user');
+var add = require('./routes/add');
 
 var app = express();
 
@@ -27,7 +28,8 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static('./public/'));
 
 // development only
 if ('development' == app.get('env')) {
@@ -36,6 +38,7 @@ if ('development' == app.get('env')) {
 
 // Add routes here
 app.get('/', index.view);
+app.get('/add', add.addFriend);
 // Example route
 // app.get('/users', user.list);
 
